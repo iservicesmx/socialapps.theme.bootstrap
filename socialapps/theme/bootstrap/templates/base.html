@@ -1,0 +1,76 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/extra.css">
+    {% block extra_css %} {% endblock %}
+    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script> 
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+    {% block extra_js %} {% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}">
+    
+    <div class="navbar navbar-fixed">
+      <div class="navbar-inner">
+        <div class="container">
+         <a href="/" class="brand"><img src="/static/images/logo.png"/></a>
+          
+          {% block nav %}{% endblock %}
+          {% block account_menu %}{% include "account_menu.html" %}{% endblock %}
+          
+        </div>
+      </div>
+    </div>
+    
+            
+    {% block body_base %}
+        <div class="container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert fade in {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+             <a class="close" data-dismiss="alert" href="#">&times;</a><p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% block body %}
+                {% block content %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+    
+    {% block footer_base %}
+        <div id="footer">
+            <div class="inner">
+                <div class="container">
+                    {% block footer %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    
+    {% block extra_body_base %}
+        {% block extra_body %}{% endblock %}
+    {% endblock %}
+</body>
+</html>
